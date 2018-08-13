@@ -11,9 +11,7 @@ class FormularioAutor extends Component {
     super();    
     this.state = {nome:'',email:'',senha:''};
     this.enviaForm = this.enviaForm.bind(this);
-    this.setNome = this.setNome.bind(this);
-    this.setEmail = this.setEmail.bind(this);
-    this.setSenha = this.setSenha.bind(this);
+    this.onChangeInput = this.onChangeInput.bind(this);
   }
 
   enviaForm(evento){
@@ -39,25 +37,17 @@ class FormularioAutor extends Component {
     });
   }
 
-  setNome(evento){
-    this.setState({nome:evento.target.value});
+  onChangeInput({target}) {
+    this.setState({[target.name] : target.value});
   }
-
-  setEmail(evento){
-    this.setState({email:evento.target.value});
-  }  
-
-  setSenha(evento){
-    this.setState({senha:evento.target.value});
-  }  
 
 	render() {
 		return (
             <div className="pure-form pure-form-aligned">
               <form className="pure-form pure-form-aligned" onSubmit={this.enviaForm} method="post">
-                <InputCustomizado id="nome" type="text" name="nome" value={this.state.nome} onChange={this.setNome} label="Nome"/>                                              
-                <InputCustomizado id="email" type="email" name="email" value={this.state.email} onChange={this.setEmail} label="Email"/>                                              
-                <InputCustomizado id="senha" type="password" name="senha" value={this.state.senha} onChange={this.setSenha} label="Senha"/>                                                                      
+                <InputCustomizado id="nome" type="text" name="nome" value={this.state.nome} onChange={this.onChangeInput} label="Nome"/>                                              
+                <InputCustomizado id="email" type="email" name="email" value={this.state.email} onChange={this.onChangeInput} label="Email"/>                                              
+                <InputCustomizado id="senha" type="password" name="senha" value={this.state.senha} onChange={this.onChangeInput} label="Senha"/>                                                                      
                 <div className="pure-control-group">                                  
                   <label></label> 
                   <BotaoSubmitCustomizado label={'GRAVAR'}/>                                    
@@ -126,8 +116,13 @@ export default class AutorBox extends Component {
   render(){
     return (
       <div>
-        <FormularioAutor/>
-        <TabelaAutores lista={this.state.lista}/>
+        <div className="header">
+          <h1>Cadastro de autores</h1>
+        </div>
+        <div className="content" id="content">                            
+          <FormularioAutor/>
+          <TabelaAutores lista={this.state.lista}/>        
+        </div>      
 
       </div>
     );
