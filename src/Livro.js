@@ -49,7 +49,7 @@ class FormularioLivro extends Component {
 
   render() {
     var autores = this.props.autores.map(function(autor){
-      return <option key={autor.id} value={autor.id}>{autor.nome}</option>;
+      return <option key={autor.id} value={autor.id}>{autor.autor.nome}</option>;
     });
     return (
       <div className="autorForm">
